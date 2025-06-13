@@ -1,6 +1,7 @@
 package com.osm.gnl.pbs.mail.gnl_pbs_mail_service.web.service;
 
 import com.osm.gnl.pbs.mail.gnl_pbs_mail_service.domain.Mailer;
+import com.osm.gnl.pbs.mail.gnl_pbs_mail_service.mappers.MailMapper;
 import com.osm.gnl.pbs.mail.gnl_pbs_mail_service.repository.MailerRepository;
 import com.osm.gnl.pbs.mail.gnl_pbs_mail_service.web.model.MailRequest;
 import com.osm.gnl.pbs.mail.gnl_pbs_mail_service.web.model.MailResponse;
@@ -8,6 +9,7 @@ import com.osm.gnl.pbs.mail.gnl_pbs_mail_service.web.model.UserCreationMailReque
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.util.ByteArrayDataSource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,6 +29,8 @@ public class MailerServiceImpl implements MailerService {
 
     private final JavaMailSender mailSender;
     private final MailerRepository mailerRepository;
+    @Autowired
+    private MailMapper mailMapper;
 
     private static final String FROM_EMAIL = "ogsg_ippms_notif@gnlsystems.com";
 
@@ -162,15 +166,6 @@ public class MailerServiceImpl implements MailerService {
     }
 
     private Mailer mapToMailer(MailRequest mailRequest) {
-        Mailer mailer = new Mailer();
-        mailer.setCopier(mailRequest.getCopier());
-        mailer.setRecipient(mailRequest.getRecipient());
-        mailer.setName(mailRequest.getName());
-        mailer.setSubject(mailRequest.getSubject());
-        mailer.setMessage(mailRequest.getMessage());
-        mailer.setSentDate(mailRequest.getSentDate() != null ? mailRequest.getSentDate() : LocalDate.now());
-        mailer.setAutoGenPassword(mailRequest.getAutoGenPassword());
-        mailer.setExpirationDateTime(mailRequest.getExpirationDateTime());
-        return mailer;
+        return mailMapper.toMailer(mailRequest);
     }
 }
