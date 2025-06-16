@@ -5,7 +5,7 @@ import com.osm.gnl.pbs.mail.gnl_pbs_mail_service.web.model.MailRequest;
 import org.mapstruct.*;
 import java.time.LocalDate;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = {LocalDate.class})
 public interface MailMapper {
 
     @Mapping(target = "id", ignore = true)
