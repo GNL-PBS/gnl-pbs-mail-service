@@ -2,7 +2,7 @@ spring:
   application:
     name: pbs-mail-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/gnl_pbs_mail_db_dev?currentSchema=gnl_pbs_ogs
+    url: jdbc:postgresql://localhost:5432/pbs_mail_service_db?currentSchema=gnl_pbs_ogs
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
