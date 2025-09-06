@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/pbs_mail_service_db?currentSchema=gnl_pbs_ogs
     username: postgres
-    password: postgres
+    password: oyas1230
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
